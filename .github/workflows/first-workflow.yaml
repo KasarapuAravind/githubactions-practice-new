@@ -9,5 +9,7 @@ jobs:
       - name: print greeting
         run: echo "hello greeting"
       - name: print how are you
-        run: echo "hello how are you"
+        run: |
+          echo "hello how are you"
+          echo "yeah im good"
     

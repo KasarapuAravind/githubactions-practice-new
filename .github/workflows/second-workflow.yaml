@@ -1,0 +1,13 @@
+name: Test the project
+on:
+  repository-dispatch
+    types: [deploy-app]
+
+jobs:
+  deploy:
+    name: deploy app
+    runs-on: ubuntu-latest
+    steps:
+      - name: print custom payload
+        run: echo "triggered deploy for ${{ github.event.client_payload.app_name }}"
+

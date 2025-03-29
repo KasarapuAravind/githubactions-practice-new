@@ -45,11 +45,11 @@ jobs:
       - name: terraform plan
         id: plan
         working-directory: environments/${{ github.event.inputs.environment }}
-        run: terraform plan
+        run: terraform plan -var-file=${{ github.event.inputs.environment }}.tfvars
 
       - name: terraform apply
         working-directory: environments/${{ github.event.inputs.environment }}
-        run: terraform apply --auto-approve
+        run: terraform apply --auto-approve -var-file=${{ github.event.inputs.environment }}.tfvars
 
 
 

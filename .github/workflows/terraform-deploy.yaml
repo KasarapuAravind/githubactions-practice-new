@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   terraform:
-    name: deployment to {{ github.event.inputs.environment }}
+    name: deployment to ${{ github.event.inputs.environment }}
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
     steps:

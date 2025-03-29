@@ -15,9 +15,9 @@ permissions:
 
 jobs:
   terraform:
-    name: deployment to {{ inputs.environment }}
+    name: deployment to {{ github.event.inputs.environment }}
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    environment: ${{ github.event.inputs.environment }}
     steps:
       - name: checkout code
         uses: actions/checkout@v4
@@ -35,20 +35,20 @@ jobs:
         run: terraform fmt -check -recursive
 
       - name: terraform init
-        working-directory: environments/${{ inputs.environment }}
+        working-directory: environments/${{ github.event.inputs.environment }}
         run: terraform init
 
       - name: terraform validate
-        working-directory: environments/${{ inputs.environment }}
+        working-directory: environments/${{ github.event.inputs.environment }}
         run: terraform validate
 
       - name: terraform plan
         id: plan
-        working-directory: environments/${{ inputs.environment }}
+        working-directory: environments/${{ github.event.inputs.environment }}
         run: terraform plan
 
       - name: terraform apply
-        working-directory: environments/${{ inputs.environment }}
+        working-directory: environments/${{ github.event.inputs.environment }}
         run: terraform apply --auto-approve
 
 

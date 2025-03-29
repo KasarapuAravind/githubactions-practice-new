@@ -1,1 +1,0 @@
-print("samplel python program")

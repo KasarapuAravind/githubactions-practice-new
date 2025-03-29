@@ -3,3 +3,4 @@ tags = {
   environment = "dev"
   owner = "aravind"
 }
+region = "us-east-1"

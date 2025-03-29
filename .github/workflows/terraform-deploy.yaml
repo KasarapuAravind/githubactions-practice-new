@@ -32,20 +32,20 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: terraform init
-        working-directory: environments/${{ github.event.inputs.environment }}
+        working-directory: terraform/environments/${{ github.event.inputs.environment }}
         run: terraform init
 
       - name: terraform validate
-        working-directory: environments/${{ github.event.inputs.environment }}
+        working-directory: terraform/environments/${{ github.event.inputs.environment }}
         run: terraform validate
 
       - name: terraform plan
         id: plan
-        working-directory: environments/${{ github.event.inputs.environment }}
+        working-directory: terraform/environments/${{ github.event.inputs.environment }}
         run: terraform plan -var-file=${{ github.event.inputs.environment }}.tfvars
 
       - name: terraform apply
-        working-directory: environments/${{ github.event.inputs.environment }}
+        working-directory: terraform/environments/${{ github.event.inputs.environment }}
         run: terraform apply --auto-approve -var-file=${{ github.event.inputs.environment }}.tfvars
 
 

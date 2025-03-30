@@ -27,3 +27,13 @@ variable "instance_profile_name" {
   description = "IAM instance profile name for ECS EC2 instances"
   type        = string
 }
+
+variable "app_image_url" {
+  description = "ECR image URL for the Java app"
+  type        = string
+}
+
+variable "task_execution_role_arn" {
+  description = "ARN of the ECS task execution role"
+  type        = string
+}

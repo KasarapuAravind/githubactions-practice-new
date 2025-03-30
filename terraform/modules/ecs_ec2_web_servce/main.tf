@@ -124,3 +124,43 @@ resource "aws_iam_instance_profile" "ecs_instance_profile" {
   name = "${var.env}-ecs-instance-profile"
   role = aws_iam_role.ecs_instance_role.name
 }
+
+resource "aws_ecs_task_definition" "java_app" {
+  family                   = "${var.env}-java-app"
+  network_mode             = "bridge"
+  requires_compatibilities = ["EC2"]
+  cpu                      = "256"
+  memory                   = "512"
+  execution_role_arn       = var.task_execution_role_arn
+
+  container_definitions = jsonencode([
+    {
+      name      = "java-app",
+      image     = var.app_image_url,   # e.g., from ECR
+      portMappings = [
+        {
+          containerPort = 8080,
+          hostPort      = 8080,
+          protocol      = "tcp"
+        }
+      ],
+      essential = true
+    }
+  ])
+}
+
+resource "aws_ecs_service" "java_app_service" {
+  name            = "${var.env}-java-service"
+  cluster         = aws_ecs_cluster.main.id
+  task_definition = aws_ecs_task_definition.java_app.arn
+  desired_count   = 1
+  launch_type     = "EC2"
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.ecs_tg.arn
+    container_name   = "java-app"
+    container_port   = 8080
+  }
+
+  depends_on = [aws_lb_listener.alb_listener]
+}

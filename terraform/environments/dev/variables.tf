@@ -11,3 +11,9 @@ variable "region" {
     type = string
     default = "us-east-1"  
 }
+
+variable "env" {
+    type = string
+    description = "Environment type(dev,test,prod)"  
+}
+

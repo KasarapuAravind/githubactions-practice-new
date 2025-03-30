@@ -164,3 +164,17 @@ resource "aws_ecs_service" "java_app_service" {
 
   depends_on = [aws_lb_listener.alb_listener]
 }
+
+resource "aws_ecr_repository" "java_app" {
+  name                 = "${var.env}-java-web-app"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+
+  tags = {
+    Environment = var.env
+    Name        = "${var.env}-java-web-app"
+  }
+}

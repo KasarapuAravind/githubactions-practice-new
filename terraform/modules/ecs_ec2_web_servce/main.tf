@@ -4,7 +4,7 @@ resource "aws_launch_template" "ecs_lt" {
   instance_type = var.instance_type
 
   iam_instance_profile {
-    name = var.instance_profile_name
+    name = aws_iam_instance_profile.ecs_instance_profile.name
   }
 
   user_data = base64encode(<<EOF
@@ -98,4 +98,29 @@ resource "aws_lb_listener" "alb_listener" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.ecs_tg.arn
   }
+}
+
+resource "aws_iam_role" "ecs_instance_role" {
+  name = "${var.env}-ecs-ec2-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [{
+      Effect = "Allow",
+      Principal = {
+        Service = "ec2.amazonaws.com"
+      },
+      Action = "sts:AssumeRole"
+    }]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "ecs_role_policy" {
+  role       = aws_iam_role.ecs_instance_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+}
+
+resource "aws_iam_instance_profile" "ecs_instance_profile" {
+  name = "${var.env}-ecs-instance-profile"
+  role = aws_iam_role.ecs_instance_role.name
 }

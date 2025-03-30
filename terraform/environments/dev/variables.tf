@@ -12,22 +12,11 @@ variable "region" {
     default = "us-east-1"  
 }
 
-variable "env" {
-    type = string
-    description = "Environment type(dev,test,prod)"  
-}
-
-variable "vpc_id" {
-  description = "VPC ID for ECS networking"
-  type        = string
-}
-
+variable "env" {}
+variable "vpc_id" {}
 variable "public_subnet_ids" {
-  description = "List of public subnet IDs for ECS tasks"
-  type        = list(string)
+  type = list(string)
 }
-
-variable "ecs_sg_id" {
-  description = "Security Group ID to attach to ECS tasks"
-  type        = string
-}
+variable "ecs_cluster_name" {}
+variable "instance_type" {}
+variable "instance_profile_name" {}

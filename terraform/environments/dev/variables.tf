@@ -17,3 +17,17 @@ variable "env" {
     description = "Environment type(dev,test,prod)"  
 }
 
+variable "vpc_id" {
+  description = "VPC ID for ECS networking"
+  type        = string
+}
+
+variable "public_subnet_ids" {
+  description = "List of public subnet IDs for ECS tasks"
+  type        = list(string)
+}
+
+variable "ecs_sg_id" {
+  description = "Security Group ID to attach to ECS tasks"
+  type        = string
+}

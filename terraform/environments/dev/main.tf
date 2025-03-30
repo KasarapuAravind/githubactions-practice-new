@@ -12,7 +12,7 @@ module "ecs_web" {
 
 
 module "ecr_repo" {
-  source = "../../modules/ecr_repo"
+  source = "../../modules/ecs_ec2_web_ser"
 
   name = "${var.env}-java-web-app"
   tags = {

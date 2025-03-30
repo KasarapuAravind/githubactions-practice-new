@@ -37,3 +37,14 @@ variable "task_execution_role_arn" {
   description = "ARN of the ECS task execution role"
   type        = string
 }
+
+variable "name" {
+  description = "ECR repository name"
+  type        = string
+}
+
+variable "tags" {
+  description = "Tags for the repository"
+  type        = map(string)
+  default     = {}
+}

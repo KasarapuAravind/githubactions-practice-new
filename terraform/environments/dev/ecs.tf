@@ -1,6 +1,6 @@
 data "aws_caller_identity" "current" {}
 
-resource "aws_ecs_cluster" "ecs_clsuter" {
+resource "aws_ecs_cluster" "ecs_cluster" {
     name = "${var.env}-ecs-java-app-cluster"
 }
 
@@ -18,7 +18,7 @@ resource "aws_iam_role" "ecs_task_execution" {
             {
                 Effect = "Allow",
                 Principal = {
-                    Service = "ecs-easks.amazonaws.com"
+                    Service = "ecs-tasks.amazonaws.com"
                 },
                 Action = "sts:AssumeRole"
             }

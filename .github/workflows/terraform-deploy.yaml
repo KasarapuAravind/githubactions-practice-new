@@ -19,9 +19,9 @@ jobs:
     runs-on: self-hosted
     environment: ${{ github.event.inputs.environment }}
     steps:
-      - name: Show runner labels
-        run: echo "${{ toJson(runner) }}"
-
+      - name: Install unzip (for self-hosted runner machine)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y unzip
 
       - name: checkout code
         uses: actions/checkout@v4

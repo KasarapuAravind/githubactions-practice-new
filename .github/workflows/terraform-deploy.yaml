@@ -20,7 +20,7 @@ jobs:
     environment: ${{ github.event.inputs.environment }}
     steps:
       - name: Install unzip (for self-hosted runner)
-        if: contains(runner.labels, self-hosted)
+        if: contains(runner.labels, 'self-hosted')
         run: sudo apt-get update && sudo apt-get install -y unzip
 
       - name: checkout code

@@ -16,7 +16,7 @@ permissions:
 jobs:
   terraform:
     name: deployment to ${{ github.event.inputs.environment }}
-    runs-on: aravind-self-runner
+    runs-on: self-hosted
     environment: ${{ github.event.inputs.environment }}
     steps:
       - name: checkout code

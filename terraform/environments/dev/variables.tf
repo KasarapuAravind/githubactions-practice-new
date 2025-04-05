@@ -3,6 +3,11 @@ variable "env_name" {
   type        = string
 }
 
+variable "cluster_name" {
+  description = "Name of ECS Cluster"
+  type        = string
+}
+
 variable "vpc_id" {
   description = "VPC ID for ECS and ALB"
   type        = string

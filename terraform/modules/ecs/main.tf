@@ -13,11 +13,11 @@ resource "aws_launch_template" "ecs_lt" {
 }
 
 resource "aws_autoscaling_group" "ecs_asg" {
-  name_prefix          = "${var.env_name}-ecs-asg"
-  max_size             = var.asg_max_size
-  min_size             = var.asg_min_size
-  desired_capacity     = var.asg_desired_capacity
-  vpc_zone_identifier  = var.private_subnet_ids
+  name_prefix         = "${var.env_name}-ecs-asg"
+  max_size            = var.asg_max_size
+  min_size            = var.asg_min_size
+  desired_capacity    = var.asg_desired_capacity
+  vpc_zone_identifier = var.private_subnet_ids
   launch_template {
     id      = aws_launch_template.ecs_lt.id
     version = "$Latest"

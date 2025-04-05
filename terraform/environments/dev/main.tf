@@ -1,10 +1,10 @@
 module "iam" {
-  source  = "../../modules/iam"
+  source   = "../../modules/iam"
   env_name = var.env_name
 }
 
 module "ecr" {
-  source  = "../../modules/ecr"
+  source   = "../../modules/ecr"
   env_name = var.env_name
 }
 
@@ -33,8 +33,8 @@ module "ecs_service" {
   env_name           = var.env_name
   cluster_name       = module.ecs.cluster_name
   target_group_arn   = module.alb.alb_target_group_arn
-  ecr_image_url      = module.ecr.ecr_repository_url     # dynamic
-  image_tag          = var.image_tag                     # from tfvars or workflow
+  ecr_image_url      = module.ecr.ecr_repository_url # dynamic
+  image_tag          = var.image_tag                 # from tfvars or workflow
   task_exec_role_arn = module.iam.ecs_task_execution_role_arn
   aws_region         = var.aws_region
 }

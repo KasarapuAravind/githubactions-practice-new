@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'choose environment (Dev, Stage, Prod)''
+        description: 'choose environment (Dev, Stage, Prod)'
         type: choice
         options: [dev, test, prod]
         required: true

@@ -4,7 +4,7 @@ resource "aws_launch_template" "ecs_lt" {
   instance_type = var.instance_type
 
   iam_instance_profile {
-    name = aws_iam_instance_profile.ecs_instance_profile.name
+    name = var.ecs_instance_profile_name
   }
 
   user_data = base64encode(templatefile("${path.module}/userdata.sh", {

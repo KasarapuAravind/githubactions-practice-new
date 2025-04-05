@@ -28,6 +28,9 @@ resource "aws_autoscaling_group" "ecs_asg" {
     value               = var.cluster_name
     propagate_at_launch = true
   }
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_ecs_cluster" "ecs" {

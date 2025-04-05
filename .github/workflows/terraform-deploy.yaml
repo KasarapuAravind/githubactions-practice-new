@@ -53,6 +53,13 @@ jobs:
         id: plan
         working-directory: terraform/environments/${{ github.event.inputs.environment }}
         run: terraform plan -var="image_tag=${{ github.event.inputs.image_tag }}" -var-file=${{ github.event.inputs.environment }}.tfvars -out=tfplan
+
+      - name: Upload tfplan artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: terraform/environments/${{ github.event.inputs.environment }}/tfplan
+
   
   terraform-apply:
     name: Terraform Apply

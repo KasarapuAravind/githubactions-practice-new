@@ -54,7 +54,7 @@ resource "aws_lb_target_group" "app_tg" {
     Environment = var.env_name
   }
 
-  depends_on = [ aws_lb_listener.http ]
+  depends_on = [aws_lb_listener.http]
 }
 
 resource "aws_lb_listener" "http" {

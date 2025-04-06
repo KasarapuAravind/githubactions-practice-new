@@ -18,7 +18,7 @@ module "alb" {
 module "ecs" {
   source                    = "../../modules/ecs"
   env_name                  = var.env_name
-  cluster_name              = "${var.env_name}-cluster"
+  cluster_name              = var.cluster_name
   ami_id                    = var.ami_id
   instance_type             = var.instance_type
   private_subnet_ids        = var.private_subnet_ids
